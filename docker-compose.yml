@@ -89,7 +89,7 @@ services:
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
 
-volumes:
+
   bot:
     build:
       context: bot/
@@ -109,9 +109,13 @@ volumes:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+volumes:
+  postgres_data:
 networks:
   lms-network:
     name: lms-network
     attachable: true
+  
+
 
   
