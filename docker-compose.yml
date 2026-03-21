@@ -90,13 +90,6 @@ services:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
 
 volumes:
-  postgres_data:
-
-networks:
-  lms-network:
-    name: lms-network
-    attachable: true
-
   bot:
     build:
       context: bot/
@@ -105,7 +98,7 @@ networks:
     networks:
       - lms-network
     environment:
-      - BOT_TOKEN=${BOT_TOKEN:?'BOT_TOKEN is required'}
+      - BOT_TOKEN=${BOT_TOKEN}
       - LMS_API_URL=http://backend:8000
       - LMS_API_KEY=${LMS_API_KEY}
       - LLM_API_KEY=${LLM_API_KEY}
@@ -115,3 +108,10 @@ networks:
       - backend
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+networks:
+  lms-network:
+    name: lms-network
+    attachable: true
+
+  
